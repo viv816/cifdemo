@@ -1,0 +1,182 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.beans.box.banking</groupId>
+  <artifactId>cif-detail</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.4.RELEASE</version>
+  </parent>
+  <name>ESB In A Box : Cif Detail</name>
+  <url>http://www.beans.com.my</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<java.version>1.8</java.version>
+	<docker.image.prefix>cif-detail</docker.image.prefix>
+	<docker.plugin.version>1.0.0</docker.plugin.version>
+	<camel.version>2.20.0</camel.version>
+	<jt400.version>9.3</jt400.version>
+	<javax-el.version>3.0.0</javax-el.version>
+	<glassfish-javax-el.version>2.2.6</glassfish-javax-el.version>
+	<!-- <docker.repository.url>192.168.0.87:5000</docker.repository.url> -->
+	<docker.repository.url>primary.bgm.local:5000</docker.repository.url>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-rest-swagger-starter</artifactId>
+      <version>2.19.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-undertow-starter</artifactId>
+      <version>2.19.1</version>
+    </dependency><!--
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency> -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.camel</groupId>
+    	<artifactId>camel-jackson</artifactId>
+    	<version>2.19.1</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.apache.camel</groupId>
+    	<artifactId>camel-netty4</artifactId>
+    	<version>2.19.1</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.apache.camel</groupId>
+    	<artifactId>camel-bean-validator</artifactId>
+    	<version>2.8.2</version>
+    </dependency>
+    <dependency>
+	    <groupId>org.apache.camel</groupId>
+    	<artifactId>camel-freemarker</artifactId>
+    	<version>2.19.1</version>
+	 </dependency>	 
+	 <dependency>
+     <groupId>net.sf.jt400</groupId>
+     <artifactId>jt400</artifactId>
+     <version>8.6</version>
+   </dependency>
+   <dependency>
+   <groupId>javax.el</groupId>
+   <artifactId>javax.el-api</artifactId>
+   <version>2.2.4</version>
+</dependency>
+<dependency>
+   <groupId>org.glassfish.web</groupId>
+   <artifactId>javax.el</artifactId>
+   <version>2.2.4</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.camel/camel-metrics -->
+<dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-metrics</artifactId>
+    <version>2.21.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-crypto</artifactId>
+    </dependency>
+
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-undertow</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-actuator</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.jolokia</groupId>
+         <artifactId>jolokia-core</artifactId>
+      </dependency>
+  </dependencies>
+  <build>
+      <plugins>
+      
+      	  <plugin>
+  <groupId>io.hawt</groupId>
+  <artifactId>hawtio-maven-plugin</artifactId>
+  <version>1.5.8</version>
+  <configuration>
+    <!-- configuration options goes here -->
+    <logClasspath>true</logClasspath>
+  </configuration>
+</plugin>
+          <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>tag-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<image>${docker.image.prefix}/${project.artifactId}</image>
+							<newName>${docker.repository.url}/${project.artifactId}</newName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>push-image</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<imageName>${docker.repository.url}/${docker.image.prefix}/${project.artifactId}</imageName>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.beans.eleave.accesslog.AccesslogApplication</mainClass>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+      </plugins>
+  </build>
+</project>
