@@ -47,7 +47,7 @@ public class CifDetail {
 				
 				String authFile = "authentication.properties";
 				
-				System.out.println("Code changed trigger ");
+				System.out.println("Code changed trigger new");
 				
 //				File file = new File("/etc/config/"+authFile);
 //				
