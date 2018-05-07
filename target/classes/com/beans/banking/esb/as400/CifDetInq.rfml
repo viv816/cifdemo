@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE rfml SYSTEM "rfml.dtd">
+<rfml version="4.0" ccsid="37">
+
+<recordformat name="CifDetInqRequest">
+	<data name="SocketHeader" type="struct" struct="SocketHeader"/>
+	<data name="DSPHeader" type="struct" struct="DSPHeader"/>
+	<data name="MBaseHeader" type="struct" struct="MBaseHeader"/>
+	<data name="RequestBody" type="struct" struct="RequestBody"/>
+</recordformat>
+
+<recordformat name="CifDetInqGoodResponse">
+	<data name="SocketHeader" type="struct" struct="SocketHeader"/>
+	<data name="DSPHeader" type="struct" struct="DSPHeader"/>
+	<data name="MBaseHeader" type="struct" struct="MBaseHeader"/>
+	<data name="GoodResponse" type="struct" struct="GoodResponse"/>
+</recordformat>
+
+<recordformat name="CifDetInqBadResponse">
+	<data name="SocketHeader" type="struct" struct="SocketHeader"/>
+	<data name="DSPHeader" type="struct" struct="DSPHeader"/>
+	<data name="MBaseHeader" type="struct" struct="MBaseHeader"/>
+	<data name="RequestBody" type="struct" struct="RequestBody"/>
+</recordformat>
+
+<struct name="SocketHeader">
+	<data name="SKTMLEN" type="zoned" length="9" init="0"/>
+	<data name="SKTHEAD" type="char" length="5" init=""/>
+	<data name="SKTDEV" type="char" length="15" init=""/>
+	<data name="SKTSKNB" type="zoned" length="9" init="0"/>
+	<data name="SKTPORT" type="zoned" length="5" init="0"/>
+	<data name="SKTFILL" type="char" length="1" init=""/>
+</struct>
+
+<struct name="DSPHeader">
+	<data name="I13HLEN" type="zoned" length="4" init="0"/>
+	<data name="I13MLEN" type="zoned" length="6" init="0"/>
+	<data name="I13VERS" type="zoned" length="4" init="0"/>
+	<data name="I13HFMID" type="char" length="4" init=""/>
+	<data name="I13FMID" type="char" length="10" init=""/>
+	<data name="I13SID" type="char" length="10" init=""/>
+	<data name="I13DID" type="char" length="10" init=""/>	
+	<data name="I13RTGN" type="char" length="6" init=""/>
+	<data name="I13MSTA" type="char" length="8" init=""/>
+	<data name="I13BIN" type="zoned" length="11" init="0"/>
+	<data name="I13NODE" type="zoned" length="2" init="0"/>	
+	<data name="I13XID" type="char" length="20" init=""/>
+	<data name="I13SSNO" type="char" length="16" init=""/>
+	<data name="I13TRCD" type="char" length="4" init=""/>
+	<data name="I13RRNO" type="char" length="22" init=""/>
+	<data name="I13ACQN" type="char" length="12" init=""/>
+	<data name="I13TMNO" type="zoned" length="4" init="0"/>
+	<data name="I13NREC" type="zoned" length="4" init="0"/>
+	<data name="I13NERR" type="zoned" length="4" init="0"/>	
+	<data name="I13USER" type="char" length="10" init=""/>
+	<data name="I13TMID" type="char" length="10" init=""/>
+	<data name="I13SUPV" type="char" length="10" init=""/>
+	<data name="I13MORE" type="char" length="1" init=""/>
+	<data name="I13CUTO" type="char" length="1" init=""/>
+	<data name="I13UDTA" type="char" length="20" init=""/>
+	<data name="I13SDTA" type="char" length="36" init=""/>
+	<data name="I13TTYP" type="char" length="2" init=""/>
+	<data name="I13RCNF" type="char" length="1" init=""/>
+	<data name="I13RCNM" type="char" length="16" init=""/>		
+</struct>
+
+<struct name="MBaseHeader">
+	<data name="HDRIND" type="char" length="2" init=""/>
+    <data name="HDUSID" type="char" length="10" init=""/>
+    <data name="HDRNUM" type="packed" length="7" init="0"/>
+    <data name="HDRBID" type="packed" length="4" init="0"/> 
+    <data name="HDEGPI" type="char" length="4" init=""/>
+    <data name="HDBMSG" type="packed" length="2" init="0"/> 
+    <data name="HDSRID" type="char" length="3" init=""/>
+    <data name="HDDSID" type="char" length="3" init=""/>
+    <data name="HDRTDQ" type="char" length="10" init=""/>
+    <data name="HDTMID" type="char" length="10" init=""/>
+    <data name="HDBKNO" type="packed" length="2" init="0"/> 
+    <data name="HDBRNO" type="packed" length="5" init="0"/> 
+    <data name="HDRSID" type="char" length="10" init=""/>
+    <data name="HDTSID" type="char" length="10" init=""/>
+    <data name="HDHSID" type="char" length="10" init=""/>
+    <data name="HDTXCD" type="packed" length="5" init="0"/> 
+    <data name="HDACCD" type="char" length="1" init=""/>
+    <data name="HDTMOD" type="char" length="1" init=""/>
+    <data name="HDNREC" type="packed" length="3" init="0"/> 
+    <data name="HDMREC" type="char" length="1" init=""/>
+    <data name="HDSMTD" type="char" length="1" init=""/>
+    <data name="HDRCD1" type="char" length="7" init=""/>
+    <data name="HDRRE1" type="char" length="50" init=""/>
+    <data name="HDRCD2" type="char" length="7" init=""/>
+    <data name="HDRRE2" type="char" length="50" init=""/>
+    <data name="HDRCD3" type="char" length="7" init=""/>
+    <data name="HDRRE3" type="char" length="50" init=""/>
+    <data name="HDRCD4" type="char" length="7" init=""/>
+    <data name="HDRRE4" type="char" length="50" init=""/>
+    <data name="HDRCD5" type="char" length="7" init=""/>
+    <data name="HDRRE5" type="char" length="50" init=""/>
+    <data name="HDDTIN" type="packed" length="8" init="0"/> 
+    <data name="HDTMIN" type="packed" length="6" init="0"/> 
+    <data name="HDACTN" type="packed" length="19" init="0"/> 
+    <data name="HDACTY" type="char" length="1" init=""/>
+    <data name="HDCIFN" type="packed" length="19" init="0"/> 
+    <data name="HDFILR" type="char" length="10" init=""/>           
+</struct>
+
+<struct name="RequestBody">
+	<data name="CFCIFN" type="packed" length="19" init="0"/>
+</struct>
+
+<struct name="GoodResponse">
+	<data name="CFCIFN" type="packed" length="19"/>
+	<data name="CFBNKN" type="packed" length="2" init="0"/>
+	<data name="CFSSNO1" type="char" length="40" init=""/>
+	<data name="CFSSNO2" type="char" length="40" init=""/>
+	<data name="CFSSCD" type="char" length="3" init=""/>
+	<data name="CFBRNN" type="packed" length="5" init="0"/>
+	<data name="CFGRUP" type="char" length="1" init=""/>
+	<data name="CFNA1" type="char" length="40" init=""/>
+	<data name="CFNA1A" type="char" length="40" init=""/>
+	<data name="CFNA1W" type="char" length="40" init=""/>
+	<data name="CFNA1AW" type="char" length="40" init=""/>
+	<data name="CFCLAS" type="char" length="1" init=""/>
+	<data name="CRSECT" type="char" length="2" init=""/>
+	<data name="CFBIR6" type="packed" length="6" init="0"/>
+	<data name="CFRACE" type="char" length="3" init=""/>
+	<data name="CFWHCD" type="packed" length="1" init="0"/>
+	<data name="CFCIFT" type="char" length="1" init=""/>
+	<data name="CFCITZ" type="char" length="3" init=""/>
+	<data name="CFNA2H" type="char" length="40" init=""/>
+	<data name="CFNA3H" type="char" length="40" init=""/>
+	<data name="CFNA4H" type="char" length="40" init=""/>
+	<data name="CFNA5H" type="char" length="40" init=""/>
+	<data name="CFZIPH" type="packed" length="9" init="0"/>
+	<data name="CFNA2C" type="char" length="40" init=""/>
+	<data name="CFNA3C" type="char" length="40" init=""/>
+	<data name="CFNA4C" type="char" length="40" init=""/>
+	<data name="CFNA5C" type="char" length="40" init=""/>
+	<data name="CFZIPC" type="packed" length="9" init="0"/>
+	<data name="CFEICM" type="packed" length="15" precision="2" init="0"/>
+	<data name="CFEES6" type="packed" length="6" init="0"/>
+	<data name="CFLGID" type="char" length="3" init=""/>
+	<data name="CFEADDO" type="char" length="30" init=""/>
+	<data name="CFEADDH" type="char" length="30" init=""/>
+	<data name="CFEADDP" type="char" length="30" init=""/>
+	<data name="CFEADDF" type="char" length="30" init=""/>
+	<data name="CFORG6" type="packed" length="6" init="0"/>
+	<data name="CFHOCD" type="char" length="1" init=""/>
+	<data name="CFDURA" type="packed" length="3" init="0"/>
+	<data name="CFDLM6" type="packed" length="6" init="0"/>
+	<data name="CFMTHI" type="packed" length="15" precision="2" init="0"/>
+	<data name="CFEADDM" type="char" length="30" init=""/>
+	<data name="CFEJCD" type="char" length="5" init=""/>
+	<data name="CFMOTH" type="char" length="40" init=""/>
+	<data name="WKBLST" type="char" length="1" init=""/>
+	<data name="CFRELP" type="char" length="2" init=""/>
+	<data name="CFZSAL" type="char" length="25" init=""/>
+	<data name="CFSEX" type="char" length="1" init=""/>
+	<data name="CFMARS" type="char" length="1" init=""/>
+	<data name="CFRELI" type="char" length="1" init=""/>
+	<data name="CFEDLV" type="char" length="1" init=""/>
+	<data name="CFENA1" type="char" length="40" init=""/>
+	<data name="CFBUST" type="char" length="4" init=""/>
+	<data name="CFEICD" type="char" length="3" init=""/>
+</struct>
+
+</rfml>
